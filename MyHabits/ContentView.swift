@@ -58,6 +58,7 @@ struct ContentView: View {
                         }
                     }
                 }
+                .onDelete(perform: removeRows)
                 .listRowBackground(Color.darkBackground)
             }
             .scrollContentBackground(.hidden)
@@ -82,6 +83,10 @@ struct ContentView: View {
                 HabitView(habit: selection, habitManager: habitManager)
             }
         }
+    }
+    
+    func removeRows(at offsets: IndexSet) {
+        habitManager.habits.remove(atOffsets: offsets)
     }
 }
 
