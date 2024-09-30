@@ -9,6 +9,9 @@ import SwiftUI
 
 struct ContentView: View {
     
+    static let habitManager = HabitManager()
+    @State private var habits: [Habit] = habitManager.habits
+    
     init() {
         let largeTitle = UIFont.preferredFont(forTextStyle: .largeTitle)
         let regularTitle = UIFont.preferredFont(forTextStyle: .body)
@@ -21,8 +24,6 @@ struct ContentView: View {
         UINavigationBar.appearance().largeTitleTextAttributes = [.font : largeFont]
         UINavigationBar.appearance().titleTextAttributes = [.font : regularFont]
     }
-    
-    @State private var habits: [Habit] = [Habit(title: "Drink water", description: "Drink some water.")]
     
     var body: some View {
         NavigationStack {
@@ -59,7 +60,7 @@ struct ContentView: View {
                 }
                 .listRowBackground(Color.darkBackground)
             }
-            .background(Color(red: 255/255, green: 255/255, blue: 240/255))
+            .background(.generalBackground)
             .scrollContentBackground(.hidden)
             .navigationTitle("MyHabit")
         }

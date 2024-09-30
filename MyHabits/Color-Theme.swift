@@ -15,5 +15,9 @@ extension ShapeStyle where Self == Color {
     static var lightBackground: Color {
         Color(red: 206/255, green: 217/255, blue: 203/255)
     }
+    
+    static var generalBackground: Color {
+        Color(red: 255/255, green: 255/255, blue: 240/255)
+    }
 }
 
