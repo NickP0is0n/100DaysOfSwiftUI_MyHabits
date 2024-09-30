@@ -10,6 +10,8 @@ import SwiftUI
 struct HabitView: View {
     @State var habit: Habit
     
+    let habitManager: HabitManager
+    
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
@@ -41,6 +43,14 @@ struct HabitView: View {
                     .padding(.top)
                 Button("I did it!") {
                     habit.timesCompleted += 1
+                    
+                    for i in 0..<habitManager.habits.count {
+                        if (habitManager.habits[i].id == habit.id) {
+                            habitManager.habits[i].timesCompleted += 1
+                            habitManager.save()
+                            break
+                        }
+                    }
                 }
                 .foregroundStyle(.white)
                 .padding()
@@ -56,6 +66,7 @@ struct HabitView: View {
 
 struct HabitView_Previews: PreviewProvider {
     static var previews: some View {
-        HabitView(habit: Habit(title: "Drink water", description: "Drink some water."))
+        let habitManager = HabitManager()
+        HabitView(habit: habitManager.habits[0], habitManager: habitManager)
     }
 }

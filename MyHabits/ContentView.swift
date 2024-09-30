@@ -79,7 +79,7 @@ struct ContentView: View {
                 AddHabitView(habitManager: habitManager)
             }
             .navigationDestination(for: Habit.self) { selection in
-                HabitView(habit: selection)
+                HabitView(habit: selection, habitManager: habitManager)
             }
         }
     }

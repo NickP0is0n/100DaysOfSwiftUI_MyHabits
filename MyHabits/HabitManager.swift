@@ -27,7 +27,7 @@ class HabitManager: ObservableObject {
         habits = [Habit]()
     }
     
-    private func save() {
+    func save() {
         guard let encodedData = try? JSONEncoder().encode(habits) else {
             fatalError("Failed to encode habit list to JSON.")
         }
