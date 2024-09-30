@@ -11,10 +11,15 @@ struct ContentView: View {
     
     init() {
         let largeTitle = UIFont.preferredFont(forTextStyle: .largeTitle)
+        let regularTitle = UIFont.preferredFont(forTextStyle: .body)
+        
         let descriptor = largeTitle.fontDescriptor.withDesign(.serif)!
         
         let largeFont = UIFont(descriptor: descriptor, size: largeTitle.pointSize)
+        let regularFont = UIFont(descriptor: descriptor, size: regularTitle.pointSize)
+        
         UINavigationBar.appearance().largeTitleTextAttributes = [.font : largeFont]
+        UINavigationBar.appearance().titleTextAttributes = [.font : regularFont]
     }
     
     @State private var habits: [Habit] = [Habit(title: "Drink water", description: "Drink some water.")]
