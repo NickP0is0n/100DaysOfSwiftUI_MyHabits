@@ -11,6 +11,8 @@
 		397B90B02CAAD0EA00F88FEB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397B90AF2CAAD0EA00F88FEB /* ContentView.swift */; };
 		397B90B22CAAD0EC00F88FEB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 397B90B12CAAD0EC00F88FEB /* Assets.xcassets */; };
 		397B90B52CAAD0EC00F88FEB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 397B90B42CAAD0EC00F88FEB /* Preview Assets.xcassets */; };
+		397B90BC2CAAD1A100F88FEB /* Habit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397B90BB2CAAD1A100F88FEB /* Habit.swift */; };
+		397B90C02CAAE39400F88FEB /* Color-Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397B90BF2CAAE39400F88FEB /* Color-Theme.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +21,8 @@
 		397B90AF2CAAD0EA00F88FEB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		397B90B12CAAD0EC00F88FEB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		397B90B42CAAD0EC00F88FEB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		397B90BB2CAAD1A100F88FEB /* Habit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Habit.swift; sourceTree = "<group>"; };
+		397B90BF2CAAE39400F88FEB /* Color-Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color-Theme.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +59,8 @@
 				397B90AF2CAAD0EA00F88FEB /* ContentView.swift */,
 				397B90B12CAAD0EC00F88FEB /* Assets.xcassets */,
 				397B90B32CAAD0EC00F88FEB /* Preview Content */,
+				397B90BB2CAAD1A100F88FEB /* Habit.swift */,
+				397B90BF2CAAE39400F88FEB /* Color-Theme.swift */,
 			);
 			path = MyHabits;
 			sourceTree = "<group>";
@@ -137,8 +143,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				397B90BC2CAAD1A100F88FEB /* Habit.swift in Sources */,
 				397B90B02CAAD0EA00F88FEB /* ContentView.swift in Sources */,
 				397B90AE2CAAD0EA00F88FEB /* MyHabitsApp.swift in Sources */,
+				397B90C02CAAE39400F88FEB /* Color-Theme.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
