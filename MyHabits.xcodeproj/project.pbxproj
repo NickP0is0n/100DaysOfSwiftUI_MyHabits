@@ -15,6 +15,7 @@
 		397B90C02CAAE39400F88FEB /* Color-Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397B90BF2CAAE39400F88FEB /* Color-Theme.swift */; };
 		397B90C22CAAE85200F88FEB /* HabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397B90C12CAAE85200F88FEB /* HabitView.swift */; };
 		397B90C42CAAF5FC00F88FEB /* HabitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397B90C32CAAF5FC00F88FEB /* HabitManager.swift */; };
+		397B90C62CAAFF6200F88FEB /* AddHabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397B90C52CAAFF6200F88FEB /* AddHabitView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		397B90BF2CAAE39400F88FEB /* Color-Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color-Theme.swift"; sourceTree = "<group>"; };
 		397B90C12CAAE85200F88FEB /* HabitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitView.swift; sourceTree = "<group>"; };
 		397B90C32CAAF5FC00F88FEB /* HabitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitManager.swift; sourceTree = "<group>"; };
+		397B90C52CAAFF6200F88FEB /* AddHabitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHabitView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 				397B90BF2CAAE39400F88FEB /* Color-Theme.swift */,
 				397B90C12CAAE85200F88FEB /* HabitView.swift */,
 				397B90C32CAAF5FC00F88FEB /* HabitManager.swift */,
+				397B90C52CAAFF6200F88FEB /* AddHabitView.swift */,
 			);
 			path = MyHabits;
 			sourceTree = "<group>";
@@ -151,6 +154,7 @@
 			files = (
 				397B90C42CAAF5FC00F88FEB /* HabitManager.swift in Sources */,
 				397B90BC2CAAD1A100F88FEB /* Habit.swift in Sources */,
+				397B90C62CAAFF6200F88FEB /* AddHabitView.swift in Sources */,
 				397B90B02CAAD0EA00F88FEB /* ContentView.swift in Sources */,
 				397B90AE2CAAD0EA00F88FEB /* MyHabitsApp.swift in Sources */,
 				397B90C02CAAE39400F88FEB /* Color-Theme.swift in Sources */,

@@ -13,9 +13,6 @@ struct HabitView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
-                Text(habit.title)
-                    .font(.largeTitle.bold())
-                    .fontDesign(.serif)
                 Text(habit.description)
                     .font(.body)
                     .fontDesign(.serif)
@@ -50,7 +47,9 @@ struct HabitView: View {
                 .background(.darkBackground)
                 .clipShape(RoundedRectangle(cornerRadius: 20))
             }
+            .frame(maxWidth: .infinity)
         }
+        .background(.generalBackground)
         .navigationTitle(habit.title)
     }
 }

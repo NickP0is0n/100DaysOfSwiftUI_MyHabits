@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
+    @ObservedObject var habitManager = HabitManager()
     
-    static let habitManager = HabitManager()
-    @State private var habits: [Habit] = habitManager.habits
+    @State private var isAddHabitSheetShown = false
     
     init() {
         let largeTitle = UIFont.preferredFont(forTextStyle: .largeTitle)
@@ -28,7 +28,7 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             List {
-                ForEach(habits) { habit in
+                ForEach(habitManager.habits) { habit in
                     NavigationLink(value: habit) {
                         HStack {
                             VStack(alignment: .leading) {
@@ -60,9 +60,27 @@ struct ContentView: View {
                 }
                 .listRowBackground(Color.darkBackground)
             }
-            .background(.generalBackground)
             .scrollContentBackground(.hidden)
+            .background(.generalBackground)
             .navigationTitle("MyHabit")
+            .toolbar {
+                Button {
+                    isAddHabitSheetShown = true
+                } label: {
+                    HStack {
+                        Image(systemName: "plus.circle.fill")
+                        Text("Add")
+                            .fontDesign(.serif)
+                    }
+                }
+                .foregroundStyle(.primary)
+            }
+            .sheet(isPresented: $isAddHabitSheetShown) {
+                AddHabitView(habitManager: habitManager)
+            }
+            .navigationDestination(for: Habit.self) { selection in
+                HabitView(habit: selection)
+            }
         }
     }
 }
