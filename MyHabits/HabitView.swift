@@ -53,7 +53,8 @@ struct HabitView: View {
                 .background(.darkBackground)
                 .clipShape(RoundedRectangle(cornerRadius: 20))
             }
-            .frame(maxWidth: .infinity)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.horizontal)
         }
         .background(.generalBackground)
         .navigationTitle(habit.title)
@@ -63,6 +64,8 @@ struct HabitView: View {
 struct HabitView_Previews: PreviewProvider {
     static var previews: some View {
         let habitManager = HabitManager()
-        HabitView(habit: habitManager.habits[0], habitManager: habitManager)
+        var test = Habit(title: "Test habit", description: "Test description")
+        test.timesCompleted = 5
+        return HabitView(habit: test, habitManager: habitManager)
     }
 }
