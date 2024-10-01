@@ -11,6 +11,7 @@ struct ContentView: View {
     @ObservedObject var habitManager = HabitManager()
     
     @State private var isAddHabitSheetShown = false
+    @State private var isEditModeEnabled = false
     
     init() {
         let largeTitle = UIFont.preferredFont(forTextStyle: .largeTitle)
@@ -27,61 +28,67 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack {
-            List {
-                ForEach(habitManager.habits) { habit in
-                    NavigationLink(value: habit) {
-                        HStack {
-                            VStack(alignment: .leading) {
-                                Text(habit.title)
-                                    .font(.headline)
-                                    .fontDesign(.serif)
-                                    .foregroundStyle(Color.white)
-                                Text(habit.description)
-                                    .font(.subheadline)
-                                    .fontDesign(.serif)
-                                    .foregroundStyle(Color.white)
-                            }
-                            Spacer()
-                            HStack {
-                                if habit.timesCompleted < 1 {
-                                    Image(systemName: "x.circle.fill")
-                                        .foregroundStyle(.red)
+            ScrollView {
+                LazyVStack(alignment: .leading) {
+                    ForEach(habitManager.habits) { habit in
+                        if isEditModeEnabled {
+                            HabitRemovalPreview(habit: habit) {
+                                guard let index = habitManager.habits.firstIndex(of: habit) else {
+                                    fatalError("This activity wasn't found in habit manager.")
                                 }
-                                else {
-                                    Image(systemName: "checkmark.circle.fill")
-                                        .foregroundStyle(.green)
-                                    Text("\(habit.timesCompleted) times")
-                                        .font(.subheadline.italic())
-                                        .foregroundStyle(Color.white)
+                                withAnimation {
+                                    habitManager.habits.remove(at: index)
                                 }
                             }
                         }
+                        else {
+                            HabitPreview(habit: habit)
+                        }
                     }
                 }
-                .onDelete(perform: removeRows)
-                .listRowBackground(Color.darkBackground)
+                .padding()
+                .navigationTitle("MyHabit")
+                .toolbar {
+                    if !isEditModeEnabled {
+                        ToolbarItem(placement: .primaryAction) {
+                            Button {
+                                isAddHabitSheetShown = true
+                            } label: {
+                                HStack {
+                                    Image(systemName: "plus.circle.fill")
+                                }
+                            }
+                            .foregroundStyle(.primary)
+                        }
+                    }
+                    
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button {
+                            withAnimation {
+                                isEditModeEnabled.toggle()
+                            }
+                        } label: {
+                            if isEditModeEnabled {
+                                Text("Done")
+                                    .fontDesign(.serif)
+                            }
+                            else {
+                                Image(systemName: "square.and.pencil")
+                            }
+                        }
+                        .foregroundStyle(.primary)
+                    }
+                    
+                }
+                .sheet(isPresented: $isAddHabitSheetShown) {
+                    AddHabitView(habitManager: habitManager)
+                }
+                .navigationDestination(for: Habit.self) { selection in
+                    HabitView(habit: selection, habitManager: habitManager)
+                }
             }
-            .scrollContentBackground(.hidden)
             .background(.generalBackground)
-            .navigationTitle("MyHabit")
-            .toolbar {
-                Button {
-                    isAddHabitSheetShown = true
-                } label: {
-                    HStack {
-                        Image(systemName: "plus.circle.fill")
-                        Text("Add")
-                            .fontDesign(.serif)
-                    }
-                }
-                .foregroundStyle(.primary)
-            }
-            .sheet(isPresented: $isAddHabitSheetShown) {
-                AddHabitView(habitManager: habitManager)
-            }
-            .navigationDestination(for: Habit.self) { selection in
-                HabitView(habit: selection, habitManager: habitManager)
-            }
+            .preferredColorScheme(.light)
         }
     }
     
