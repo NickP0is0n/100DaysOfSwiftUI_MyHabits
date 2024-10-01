@@ -42,15 +42,11 @@ struct HabitView: View {
                     .fontDesign(.serif)
                     .padding(.top)
                 Button("I did it!") {
-                    habit.timesCompleted += 1
-                    
-                    for i in 0..<habitManager.habits.count {
-                        if (habitManager.habits[i].id == habit.id) {
-                            habitManager.habits[i].timesCompleted += 1
-                            habitManager.save()
-                            break
-                        }
+                    guard let index = habitManager.habits.firstIndex(of: habit) else {
+                        fatalError("This activity wasn't found in habit manager.")
                     }
+                    habit.timesCompleted += 1
+                    habitManager.habits[index] = habit
                 }
                 .foregroundStyle(.white)
                 .padding()
