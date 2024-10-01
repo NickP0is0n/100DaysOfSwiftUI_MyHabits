@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HabitView: View {
     @State var habit: Habit
+    @State private var taskCompletedPressed = false
     
     let habitManager: HabitManager
     
@@ -41,17 +42,40 @@ struct HabitView: View {
                     .font(.subheadline)
                     .fontDesign(.serif)
                     .padding(.top)
-                Button("I did it!") {
-                    guard let index = habitManager.habits.firstIndex(of: habit) else {
-                        fatalError("This activity wasn't found in habit manager.")
+                
+                HStack {
+                    Button("I did it!") {
+                        guard let index = habitManager.habits.firstIndex(of: habit) else {
+                            fatalError("This activity wasn't found in habit manager.")
+                        }
+                        habit.timesCompleted += 1
+                        habitManager.habits[index] = habit
+                        withAnimation {
+                            taskCompletedPressed = true
+                        }
                     }
-                    habit.timesCompleted += 1
-                    habitManager.habits[index] = habit
+                    .foregroundStyle(.white)
+                    .padding()
+                    .background(.darkBackground)
+                    .clipShape(RoundedRectangle(cornerRadius: 20))
+                    
+                    if taskCompletedPressed {
+                        Button("Revert") {
+                            guard let index = habitManager.habits.firstIndex(of: habit) else {
+                                fatalError("This activity wasn't found in habit manager.")
+                            }
+                            habit.timesCompleted -= 1
+                            habitManager.habits[index] = habit
+                            withAnimation {
+                                taskCompletedPressed = false
+                            }
+                        }
+                        .foregroundStyle(.darkBackground)
+                        .padding()
+                        .background(.lightBackground)
+                        .clipShape(RoundedRectangle(cornerRadius: 20))
+                    }
                 }
-                .foregroundStyle(.white)
-                .padding()
-                .background(.darkBackground)
-                .clipShape(RoundedRectangle(cornerRadius: 20))
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.horizontal)
