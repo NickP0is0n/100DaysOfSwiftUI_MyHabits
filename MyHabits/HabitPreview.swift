@@ -17,11 +17,11 @@ struct HabitPreview: View {
                     Text(habit.title)
                         .font(.headline)
                         .fontDesign(.serif)
-                        .foregroundStyle(Color.white)
+                        .foregroundStyle(.white)
                     Text(habit.description)
                         .font(.subheadline)
                         .fontDesign(.serif)
-                        .foregroundStyle(Color.white)
+                        .foregroundStyle(.white)
                         .multilineTextAlignment(.leading)
                 }
                 Spacer()
@@ -35,8 +35,10 @@ struct HabitPreview: View {
                             .foregroundStyle(.green)
                         Text("\(habit.timesCompleted) times")
                             .font(.subheadline.italic())
-                            .foregroundStyle(Color.white)
+                            .foregroundStyle(.white)
                     }
+                    Image(systemName: "chevron.right")
+                        .foregroundStyle(.white)
                 }
             }
             .padding()
@@ -81,6 +83,6 @@ struct HabitPreview_Previews: PreviewProvider {
     static var previews: some View {
         var test = Habit(title: "Test habit", description: "Test description")
         test.timesCompleted = 5
-        return HabitRemovalPreview(habit: test) {}
+        return HabitPreview(habit: test)
     }
 }
