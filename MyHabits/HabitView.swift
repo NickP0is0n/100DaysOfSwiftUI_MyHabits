@@ -59,15 +59,17 @@ struct HabitView: View {
                     .background(.darkBackground)
                     .clipShape(RoundedRectangle(cornerRadius: 20))
                     
-                    if taskCompletedPressed {
+                    if taskCompletedPressed { // to display it
                         Button("Revert") {
-                            guard let index = habitManager.habits.firstIndex(of: habit) else {
-                                fatalError("This activity wasn't found in habit manager.")
-                            }
-                            habit.timesCompleted -= 1
-                            habitManager.habits[index] = habit
-                            withAnimation {
-                                taskCompletedPressed = false
+                            if taskCompletedPressed { // it disappears, do not do anything
+                                guard let index = habitManager.habits.firstIndex(of: habit) else {
+                                    fatalError("This activity wasn't found in habit manager.")
+                                }
+                                habit.timesCompleted -= 1
+                                habitManager.habits[index] = habit
+                                withAnimation {
+                                    taskCompletedPressed = false
+                                }
                             }
                         }
                         .foregroundStyle(.darkBackground)
