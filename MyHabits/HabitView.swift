@@ -49,7 +49,7 @@ struct HabitView: View {
                         } else {
                             Image(systemName: "checkmark.circle.fill")
                                 .foregroundStyle(.green)
-                            Text("You have completed the task \(habit.timesCompleted) times!")
+                            Text("^[You have completed the task \(habit.timesCompleted) time!](inflect: true)")
                                 .font(.headline)
                                 .fontDesign(.serif)
                         }

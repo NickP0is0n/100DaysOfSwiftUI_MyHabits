@@ -46,7 +46,7 @@ struct HabitPreview: View {
                         else {
                             Image(systemName: "checkmark.circle.fill")
                                 .foregroundStyle(.green)
-                            Text("\(habit.timesCompleted) times")
+                            Text("^[\(habit.timesCompleted) time](inflect: true)")
                                 .font(.subheadline.italic())
                                 .foregroundStyle(.white)
                         }
