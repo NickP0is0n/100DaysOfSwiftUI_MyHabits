@@ -14,15 +14,21 @@ struct AddHabitView: View {
     
     @State private var name = ""
     @State private var description = ""
+    @State private var isDaily = false
     
     var body: some View {
         NavigationStack {
             VStack {
                 Form {
-                    Section() {
+                    Section {
                         TextField("Title", text: $name)
                             .fontDesign(.serif)
                         TextField("Description", text: $description)
+                            .fontDesign(.serif)
+                    }
+                    
+                    Section {
+                        Toggle("Do you want to do this daily?", isOn: $isDaily)
                             .fontDesign(.serif)
                     }
                 }
@@ -44,7 +50,7 @@ struct AddHabitView: View {
                 }
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Save") {
-                        habitManager.habits.append(Habit(title: name, description: description))
+                        habitManager.habits.append(Habit(title: name, description: description, isDaily: isDaily))
                         dismiss()
                     }
                 }

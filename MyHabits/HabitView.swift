@@ -11,6 +11,8 @@ struct HabitView: View {
     @State var habit: Habit
     @State private var taskCompletedPressed = false
     
+    @State private var previousDate = Date.now
+    
     let habitManager: HabitManager
     
     var body: some View {
@@ -21,20 +23,38 @@ struct HabitView: View {
                     .fontDesign(.serif)
                 
                 HStack {
-                    if habit.timesCompleted <= 0 {
-                        Image(systemName: "x.circle.fill")
-                            .foregroundStyle(.red)
-                        Text("You have not completed your task yet!")
-                            .font(.headline)
-                            .fontDesign(.serif)
-                            .foregroundStyle(.red)
+                    if habit.isDaily {
+                        if !Calendar.current.isDate(habit.lastCompleteDate, inSameDayAs: Date.now) {
+                            Image(systemName: "x.circle.fill")
+                                .foregroundStyle(.red)
+                            Text("You have not completed your task today!")
+                                .font(.headline)
+                                .fontDesign(.serif)
+                                .foregroundStyle(.red)
+                        } else {
+                            Image(systemName: "checkmark.circle.fill")
+                                .foregroundStyle(.green)
+                            Text("You have completed the task today at \(habit.lastCompleteDate.formatted(date: .omitted, time: .shortened))!")
+                                .font(.headline)
+                                .fontDesign(.serif)
+                        }
                     } else {
-                        Image(systemName: "checkmark.circle.fill")
-                            .foregroundStyle(.green)
-                        Text("You have completed the task \(habit.timesCompleted) times!")
-                            .font(.headline)
-                            .fontDesign(.serif)
+                        if habit.timesCompleted <= 0 {
+                            Image(systemName: "x.circle.fill")
+                                .foregroundStyle(.red)
+                            Text("You have not completed your task yet!")
+                                .font(.headline)
+                                .fontDesign(.serif)
+                                .foregroundStyle(.red)
+                        } else {
+                            Image(systemName: "checkmark.circle.fill")
+                                .foregroundStyle(.green)
+                            Text("You have completed the task \(habit.timesCompleted) times!")
+                                .font(.headline)
+                                .fontDesign(.serif)
+                        }
                     }
+                    
                 }
                 .padding(.top)
                 
@@ -48,7 +68,12 @@ struct HabitView: View {
                         guard let index = habitManager.habits.firstIndex(of: habit) else {
                             fatalError("This activity wasn't found in habit manager.")
                         }
-                        habit.timesCompleted += 1
+                        if habit.isDaily {
+                            previousDate = habit.lastCompleteDate
+                            habit.lastCompleteDate = Date.now
+                        } else {
+                            habit.timesCompleted += 1
+                        }
                         habitManager.habits[index] = habit
                         withAnimation {
                             taskCompletedPressed = true
@@ -65,7 +90,11 @@ struct HabitView: View {
                                 guard let index = habitManager.habits.firstIndex(of: habit) else {
                                     fatalError("This activity wasn't found in habit manager.")
                                 }
-                                habit.timesCompleted -= 1
+                                if habit.isDaily {
+                                    habit.lastCompleteDate = previousDate
+                                } else {
+                                    habit.timesCompleted -= 1
+                                }
                                 habitManager.habits[index] = habit
                                 withAnimation {
                                     taskCompletedPressed = false

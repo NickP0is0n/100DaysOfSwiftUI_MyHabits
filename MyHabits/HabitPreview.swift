@@ -26,17 +26,32 @@ struct HabitPreview: View {
                 }
                 Spacer()
                 HStack {
-                    if habit.timesCompleted < 1 {
-                        Image(systemName: "x.circle.fill")
-                            .foregroundStyle(.red)
+                    if habit.isDaily {
+                        if !Calendar.current.isDate(habit.lastCompleteDate, inSameDayAs: Date.now) {
+                            Image(systemName: "x.circle.fill")
+                                .foregroundStyle(.red)
+                        }
+                        else {
+                            Image(systemName: "checkmark.circle.fill")
+                                .foregroundStyle(.green)
+                            Text(habit.lastCompleteDate, format: .dateTime.hour().minute())
+                                .font(.subheadline.italic())
+                                .foregroundStyle(.white)
+                        }
+                    } else {
+                        if habit.timesCompleted < 1 {
+                            Image(systemName: "x.circle.fill")
+                                .foregroundStyle(.red)
+                        }
+                        else {
+                            Image(systemName: "checkmark.circle.fill")
+                                .foregroundStyle(.green)
+                            Text("\(habit.timesCompleted) times")
+                                .font(.subheadline.italic())
+                                .foregroundStyle(.white)
+                        }
                     }
-                    else {
-                        Image(systemName: "checkmark.circle.fill")
-                            .foregroundStyle(.green)
-                        Text("\(habit.timesCompleted) times")
-                            .font(.subheadline.italic())
-                            .foregroundStyle(.white)
-                    }
+                    
                     Image(systemName: "chevron.right")
                         .foregroundStyle(.white)
                 }

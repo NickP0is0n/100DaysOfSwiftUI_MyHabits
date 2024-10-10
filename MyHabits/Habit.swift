@@ -12,5 +12,8 @@ struct Habit: Codable, Hashable, Equatable, Identifiable {
     var title: String
     var description: String
     
+    var isDaily = false
+    var lastCompleteDate = Date(timeIntervalSince1970: 0)
+    
     var timesCompleted = 0
 }
